@@ -1,0 +1,1 @@
+[{"uid":"1f8dbebcf5e73d02","name":"Check visiting the frontpage","time":{"start":1724866849216,"stop":1724866850301,"duration":1085},"status":"passed","severity":"normal"},{"uid":"50b342144903245e","name":"Login with valid credentials","time":{"start":1724866850302,"stop":1724866851087,"duration":785},"status":"passed","severity":"normal"}]
