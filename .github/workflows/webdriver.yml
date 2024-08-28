@@ -37,3 +37,24 @@ jobs:
         PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PUBLISH_BRANCH: gh-pages
         PUBLISH_DIR: allure-report    
+  docker-test:
+    runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:19.03.12
+        options: --privileged
+        ports:
+        - 4444:4444
+        volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+    - name: Install dependencies
+      run: npm ci
+    - name: Build Docker image
+      run: docker build -t webdriverio-tests -f Dockerfile .
+    - name: Run Webdriver tests on Docker
+      run: docker run -it webdriverio-tests
