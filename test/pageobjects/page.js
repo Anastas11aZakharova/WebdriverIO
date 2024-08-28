@@ -10,6 +10,6 @@ export default class Page {
     * @param path path of the sub page (e.g. /path/to/page.html)
     */
     open () {
-        return browser.url(`https://www.saucedemo.com/`)
+        return browser.url(`/`)
     }
 }

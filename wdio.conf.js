@@ -1,10 +1,12 @@
 import allure from "allure-commandline"
 
+
 // const env = process.env.ENV || 'development';
 const browser = process.env.BROWSER || 'firefox';
 // const isDocker = process.env.DOCKER === 'true';
 
 export const config = {
+    baseUrl: 'https://www.saucedemo.com/',
     runner: 'local',
     specs: [
         './test/specs/**/*.js'
