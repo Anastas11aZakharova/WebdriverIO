@@ -5,6 +5,9 @@
     "chrome": "cross-env BROWSER=chrome npx wdio run ./wdio.conf.js",
     "firefox": "cross-env BROWSER=firefox npx wdio run ./wdio.conf.js",
     "edge": "cross-env BROWSER=MicrosoftEdge npx wdio run ./wdio.conf.js",
+    "chrome-prod": "cross-env ENV=prod BROWSER=chrome npx wdio run ./wdio.conf.js",
+    "firefox-prod": "cross-env ENV=prod BROWSER=firefox npx wdio run ./wdio.conf.js",
+    "edge-prod": "cross-env ENV=prod BROWSER=MicrosoftEdge npx wdio run ./wdio.conf.js",
     "generate-report": "allure generate --clean",
     "open-report": "allure open"
   },  

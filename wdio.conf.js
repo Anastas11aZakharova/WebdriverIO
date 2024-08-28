@@ -1,7 +1,7 @@
 import allure from "allure-commandline"
 
 
-// const env = process.env.ENV || 'development';
+const env = process.env.ENV || 'dev';
 const browser = process.env.BROWSER || 'firefox';
 // const isDocker = process.env.DOCKER === 'true';
 
@@ -12,10 +12,20 @@ export const config = {
         './test/specs/**/*.js'
     ],
     maxInstances: 10,
-    capabilities: [{
-        // capabilities for local browser web tests
-        browserName: browser // or "firefox", "microsoftedge", "safari"
-    }],
+    capabilities: [
+        {
+            browserName: browser,
+            'goog:chromeOptions': {
+                args: []
+            },
+            'moz:firefoxOptions': {
+                args: []
+            },
+            'ms:edgeOptions': {
+                args: []
+            }
+        }
+    ],
     logLevel: 'info',
     bail: 0,
     waitforTimeout: 20000,
@@ -61,4 +71,14 @@ export const config = {
         })
     }    
  
+}
+
+if (env === 'prod') {
+    config.capabilities[0]['goog:chromeOptions'].args = ['--headless', '--disable-gpu'];
+    config.capabilities[0]['moz:firefoxOptions'].args = ['-headless'];
+    config.capabilities[0]['ms:edgeOptions'].args = ['--headless', '--disable-gpu'];
+} else {
+    config.capabilities[0]['goog:chromeOptions'].args = ['--window-size=1280,720'];
+    config.capabilities[0]['moz:firefoxOptions'].args = ['--width=1280', '--height=720'];
+    config.capabilities[0]['ms:edgeOptions'].args = ['--window-size=1280,720'];
 }
