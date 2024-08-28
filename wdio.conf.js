@@ -48,33 +48,40 @@ export const config = {
         if (error) {
             await browser.takeScreenshot();
         }
-    },    
+    }
+    // ,    
 
-    onComplete: function() {
-        const reportError = new Error('Could not generate Allure report')
-        const generation = allure(['generate', 'allure-results', '--clean'])
-        return new Promise((resolve, reject) => {
-            const generationTimeout = setTimeout(
-                () => reject(reportError),
-                5000)
+    // onComplete: function() {
+    //     const reportError = new Error('Could not generate Allure report')
+    //     const generation = allure(['generate', 'allure-results', '--clean'])
+    //     return new Promise((resolve, reject) => {
+    //         const generationTimeout = setTimeout(
+    //             () => reject(reportError),
+    //             5000)
 
-            generation.on('exit', function(exitCode) {
-                clearTimeout(generationTimeout)
+    //         generation.on('exit', function(exitCode) {
+    //             clearTimeout(generationTimeout)
 
-                if (exitCode !== 0) {
-                    return reject(reportError)
-                }
+    //             if (exitCode !== 0) {
+    //                 return reject(reportError)
+    //             }
 
-                console.log('Allure report successfully generated')
-                resolve()
-            })
-        })
-    }    
+    //             console.log('Allure report successfully generated')
+    //             resolve()
+    //         })
+    //     })
+    // }    
  
 }
 
 if (env === 'prod') {
-    config.capabilities[0]['goog:chromeOptions'].args = ['--headless', '--disable-gpu'];
+    config.capabilities[0]['goog:chromeOptions'].args = [
+        '--no-sandbox',
+        '--disable-infobars',
+        '--headless',
+        '--disable-gpu',
+        '--window-size=1440,735'
+    ];
     config.capabilities[0]['moz:firefoxOptions'].args = ['-headless'];
     config.capabilities[0]['ms:edgeOptions'].args = ['--headless', '--disable-gpu'];
 } else {
