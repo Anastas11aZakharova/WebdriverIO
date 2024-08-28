@@ -1,0 +1,39 @@
+name: WebdriverIO tests
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: lts/*
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run Webdriver tests
+      run: npm run firefox-prod
+      continue-on-error: true
+
+    - name: Generate Allure Report
+      run: npm run generate-report
+
+    - name: Upload Allure Report as Artifact
+      uses: actions/upload-artifact@v4
+      with:
+          name: allure-report
+          path: allure-report      
+
+    - name: Deploy report to Github Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: allure-report    
