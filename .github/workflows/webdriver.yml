@@ -55,6 +55,6 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Build Docker image
-      run: docker build -t webdriverio-tests -f Dockerfile .
+      run: docker build --rm webdriverio-tests -f Dockerfile .
     - name: Run Webdriver tests on Docker
       run: docker run -it webdriverio-tests
