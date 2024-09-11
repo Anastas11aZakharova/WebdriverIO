@@ -1,11 +1,6 @@
 import { expect } from "@wdio/globals";
-import LoginPage from "../pageobjects/login.page.js";
 import ProductPage from "../pageobjects/product.page.js";
-import Helper from "../pageobjects/helper.js";
 import CartPage from "../pageobjects/cart.page.js";
-import CheckoutPage from "../pageobjects/checkout.page.js";
-import OverviewPage from "../pageobjects/overview.page.js";
-import CompletePage from "../pageobjects/complete.page.js";
 
 class CommonSteps {
     

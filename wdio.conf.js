@@ -1,9 +1,6 @@
-import allure from "allure-commandline"
-
-
 const env = process.env.ENV || 'dev';
 const browser = process.env.BROWSER || 'firefox';
-// const isDocker = process.env.DOCKER === 'true';
+
 
 export const config = {
     baseUrl: 'https://www.saucedemo.com/',
@@ -49,29 +46,7 @@ export const config = {
             await browser.takeScreenshot();
         }
     }
-    // ,    
-
-    // onComplete: function() {
-    //     const reportError = new Error('Could not generate Allure report')
-    //     const generation = allure(['generate', 'allure-results', '--clean'])
-    //     return new Promise((resolve, reject) => {
-    //         const generationTimeout = setTimeout(
-    //             () => reject(reportError),
-    //             5000)
-
-    //         generation.on('exit', function(exitCode) {
-    //             clearTimeout(generationTimeout)
-
-    //             if (exitCode !== 0) {
-    //                 return reject(reportError)
-    //             }
-
-    //             console.log('Allure report successfully generated')
-    //             resolve()
-    //         })
-    //     })
-    // }    
- 
+   
 }
 
 if (env === 'prod') {
